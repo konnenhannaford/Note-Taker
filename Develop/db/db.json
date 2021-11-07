@@ -1,6 +1,19 @@
 [
     {
-        "title":"Test Title",
-        "text":"Test text"
+        "title":"Make Beats",
+        "text":"Find top 20 songs of past year to remix",
+        "id":""
+    },
+
+    {
+        "title":"Make Beats",
+        "text":"Clean up samples to fit tempo",
+        "id":""
+    },
+
+    {
+        "title":"Make Beats",
+        "text":"chop off the unused sampl files to save space",
+        "id":""
     }
 ]
