@@ -11,7 +11,7 @@ const { rawListeners } = require(".");
 const { readFileSync } = require("fs");
 
 // GET notes from db.json
-router.get('/', (req, res){
+router.get('/', function (req, res){
     readFromFile('../db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
