@@ -10,26 +10,22 @@ const {
 const { rawListeners } = require(".");
 const { readFileSync } = require("fs");
 
-// GET notes from db.json
-router.get('/', function (req, res){
+// looks for the notes 
+router.get('/', (req, res)=>{
     readFromFile('../db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
-router.post('/', function(req, res){
-    // save notes to db.json
-    // read file, 
-    // then add new data to array
-    // then save array as file (overwrite when using writeFile)
+router.post('/', (req, res)=>{
     readFromFile("./db/db.json", { encoding: "utf-8" }, (err, data) => {
         if (err) {
-            console.log("Error writing file");
+            // console.log("Error writing file");
             res.status(500);
         } else {
             let dataBase = JSON.parse(data);
             let newNote = req.body
             newNote.id = uuid();
             dataBase.push(newNote);
-            console.log(req.body);
+            // console.log(req.body);
             writeToFile('./db/db.json', dataBase);
             res.json(dataBase);
         }
