@@ -1,5 +1,5 @@
 // Dependencies
-const router = require("express").Router();
+const notes = require("express").Router();
 const path = require("path");
 const uuid = require("../helpers/uuid");
 
@@ -11,11 +11,11 @@ const { rawListeners } = require(".");
 const { readFileSync } = require("fs");
 
 // looks for the notes 
-router.get('/', (req, res)=>{
+notes.get('/', (req, res)=>{
     readFromFile('../db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
-router.post('/', (req, res)=>{
+notes.post('/', (req, res)=>{
     readFromFile("./db/db.json", { encoding: "utf-8" }, (err, data) => {
         if (err) {
             // console.log("Error writing file");
@@ -33,7 +33,7 @@ router.post('/', (req, res)=>{
 });
 
 //READ database, find note you want to delete and then delete it 
-router.delete('/:id', function(req, res){
+notes.delete('/:id', function(req, res){
     readFromFile("./db/db.json", { encoding: "utf-8" }, (err, data) => {
         if (err){
             console.log("Error deleting file");
@@ -53,4 +53,4 @@ router.delete('/:id', function(req, res){
 
 
 
-module.exports = router;
+module.exports = notes;
