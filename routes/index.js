@@ -1,9 +1,9 @@
-// Dependencies 
+
 const express = require("express");
-const apiRoutes = require("./apiroutes");
+const notesRouter = require("./notes");
 
 const app = express();
 
-app.use("/notes", apiRoutes);
+app.use("/notes", notesRouter);
 
 module.exports = app;

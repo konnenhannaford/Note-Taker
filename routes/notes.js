@@ -2,12 +2,12 @@
 const notes = require("express").Router();
 const path = require("path");
 const uuid = require("../helpers/uuid");
-
 const {
-    readFromFile, 
-    writeToFile, 
+    readFromFile,
     readAndAppend,
-} = require("../helpers/fsUTIL");
+    writeToFile,
+  } = require('../helpers/fsUtils');
+  
 // const { rawListeners } = require(".");
 // const { readFileSync } = require("fs");
 
@@ -32,6 +32,26 @@ notes.post('/', (req, res)=>{
         }
     });
 });
+
+tips.post('/', (req, res) => {
+    console.log(req.body);
+  
+    const { username, topic, tip } = req.body;
+  
+    if (req.body) {
+      const newTip = {
+        username,
+        tip,
+        topic,
+        tip_id: uuidv4(),
+      };
+  
+      readAndAppend(newTip, './db/tips.json');
+      res.json(`Tip added successfully 🚀`);
+    } else {
+      res.error('Error in adding tip');
+    }
+  });
 
 //READ database, find note you want to delete and then delete it 
 notes.delete('/:id', (req, res) =>{
