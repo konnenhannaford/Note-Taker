@@ -1,4 +1,3 @@
-// Dependencies
 const notes = require("express").Router();
 const path = require("path");
 const uuid = require("../helpers/uuid");
@@ -11,7 +10,6 @@ const {
 // const { rawListeners } = require(".");
 // const { readFileSync } = require("fs");
 
-// looks for the notes 
 notes.get('/', (req, res)=>{
     readFromFile('../db/db.json').then((data) => res.json(JSON.parse(data)));
 });
@@ -20,7 +18,7 @@ notes.post('/', (req, res) => {
     console.log(req.body);
     const { text, title } = req.body;
     if (req.body) {
-      const newTip = {
+      const newNote = {
         text,
         title,
         id: uuid(),   
@@ -44,12 +42,10 @@ notes.post('/', (req, res) => {
       });
   });
 
-//READ database, find note you want to delete and then delete it 
 notes.delete('/:id', (req, res) =>{
     readFromFile("./db/db.json")
     .then((data) => JSON.parse(data))
       .then((json) => {
-        // Make a new array of all tips except the one with the ID provided in the URL
         const result = json.filter((note) => note.id !== noteId);
         writeToFile('./db/db.json', result); 
         res.json(`This note has been deleted ${noteId}`);

@@ -13,6 +13,8 @@
 * [License](#license)
 
 ## Description
+App can be accessed via - https://lit-atoll-31253.herokuapp.com/
+
 This is a Note Taker app that will allow users to create and save notes on the provided link.  once saved, users can view old notes and make updates as well as remove old notes that may no longer be needed.
 
 ## Technologies
