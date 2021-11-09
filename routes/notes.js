@@ -10,9 +10,8 @@ const {
 // const { rawListeners } = require(".");
 // const { readFileSync } = require("fs");
 
-notes.get("/", (req, res) => {
-    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
-});
+notes.get("/", (req, res) => 
+    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data))));
 
 notes.post('/', (req, res) => {
     console.log(req.body);
