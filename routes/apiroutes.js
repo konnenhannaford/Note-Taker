@@ -2,16 +2,17 @@
 const router = require("express").Router();
 const path = require("path");
 const uuid = require("../helpers/uuid");
+
 const {
     readFromFile, 
     writeToFile, 
-} = require("../helpers/fsUtils");
+} = require("../helpers/fsUtil");
 const { rawListeners } = require(".");
 const { readFileSync } = require("fs");
 
 // GET notes from db.json
-router.get('/', function(req, res){
-    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+router.get('/', (req, res){
+    readFromFile('../db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
 router.post('/', function(req, res){
