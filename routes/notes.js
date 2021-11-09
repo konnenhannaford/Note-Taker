@@ -6,9 +6,10 @@ const uuid = require("../helpers/uuid");
 const {
     readFromFile, 
     writeToFile, 
+    readAndAppend,
 } = require("../helpers/fsUTIL");
-const { rawListeners } = require(".");
-const { readFileSync } = require("fs");
+// const { rawListeners } = require(".");
+// const { readFileSync } = require("fs");
 
 // looks for the notes 
 notes.get('/', (req, res)=>{
@@ -33,24 +34,15 @@ notes.post('/', (req, res)=>{
 });
 
 //READ database, find note you want to delete and then delete it 
-notes.delete('/:id', function(req, res){
-    readFromFile("./db/db.json", { encoding: "utf-8" }, (err, data) => {
-        if (err){
-            console.log("Error deleting file");
-            res.status(500);
-        } else {
-            let dataBase = JSON.parse(data);
-            let noteId = req.params.id;
-            let deleteIndex =  dataBase.findIndex((note) => {
-                return note.id === noteId;
-            });
-            dataBase.splice(deleteIndex, 1);
-            writeToFile("./db/db.json", dataBase);
-            res.json(dataBase);
-        }
-    });
-});
-
-
+notes.delete('/:id', (req, res) =>{
+    readFromFile("./db/db.json")
+    .then((data) => JSON.parse(data))
+      .then((json) => {
+        // Make a new array of all tips except the one with the ID provided in the URL
+        const result = json.filter((note) => note.id !== noteId);
+        writeToFile('./db/db.json', result); 
+        res.json(`This note has been deleted ${noteId}`);
+      });
+  });
 
 module.exports = notes;
