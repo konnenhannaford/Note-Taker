@@ -10,8 +10,8 @@ const {
 // const { rawListeners } = require(".");
 // const { readFileSync } = require("fs");
 
-notes.get('/', (req, res)=>{
-    readFromFile('../db/db.json').then((data) => res.json(JSON.parse(data)));
+notes.get("/", (req, res) => {
+    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
 });
 
 notes.post('/', (req, res) => {
@@ -24,6 +24,10 @@ notes.post('/', (req, res) => {
         id: uuid(),   
       };
       readAndAppend(newNote, "./db/db.json");
+    //   const response = {
+    //     status: 'success',
+    //     body: newNote,
+    //   };
       res.json(`note added successfully `);
     } else {
       res.error('Error in adding note');
